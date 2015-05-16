@@ -1,3 +1,7 @@
+dima_batteries:
+    resource: "@DimaBatteriesBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
