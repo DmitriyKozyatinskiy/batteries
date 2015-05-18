@@ -1,3 +1,7 @@
+show:
+    path:     /
+    defaults: { _controller: DimaBatteriesBundle:Batteries:show }
+
 add:
     path:     /add
     defaults: { _controller: DimaBatteriesBundle:Batteries:add }

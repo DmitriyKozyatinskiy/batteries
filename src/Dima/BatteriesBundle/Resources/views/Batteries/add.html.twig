@@ -1,13 +1,17 @@
- {% extends '::base.html.twig' %}
+{% extends '::Batteries/layout.html.twig' %}
 
- {% block body %}
-     {{ error is defined ? error : '' }}
+{% block title %}Add Batteries{% endblock %}
 
-     {{ form_start(form) }}
+{% block content %}
+    {{ error is defined ? error : '' }}
 
-     {{ form_row(form.type) }}
-     {{ form_row(form.count) }}
-     {{ form_row(form.owner) }}
+    {{ form_start(form) }}
 
-     {{ form_end(form) }}
- {% endblock %}
+    {{ form_row(form.type) }}
+    {{ form_row(form.count) }}
+    {{ form_row(form.owner) }}
+
+    <input type="submit" value="Save">
+
+    {{ form_end(form) }}
+{% endblock %}

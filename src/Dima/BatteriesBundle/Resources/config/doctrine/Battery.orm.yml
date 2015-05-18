@@ -1,6 +1,7 @@
 Dima\BatteriesBundle\Entity\Battery:
     type: entity
     table: null
+    repositoryClass: Dima\BatteriesBundle\Entity\BatteryRepository
     id:
         id:
             type: integer

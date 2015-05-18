@@ -3,35 +3,45 @@
 namespace Dima\BatteriesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Dima\BatteriesBundle\Entity\Battery;
 use Dima\BatteriesBundle\Form\BatteryType;
 
 class BatteriesController extends Controller
 {
-    public function addAction()
+    public function showAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $batteries = $em
+            ->getRepository('DimaBatteriesBundle:Battery')
+            ->findAllGroupedByType();
+
+        return $this->render('DimaBatteriesBundle:Batteries:show.html.twig', [
+            'batteries' => $batteries
+        ]);
+    }
+
+    public function addAction(Request $request)
     {
         $form = $this->createForm(new BatteryType());
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $count = $form['count']->getData();
             $data = $form->getData();
-            $battery = new Battery();
 
-            for ($i = 0; $i < $data->count; ++$i) {
-                $battery->setType($data->type);
-                $battery->setOwner($data->owner);
+            $em = $this->getDoctrine()->getManager();
 
-                $em->persist($battery);
+            for ($i = 0; $i < $count; ++$i) {
+                $em->persist($data);
+                $em->flush();
+                $em->clear();
             }
-
-            $em->flush();
-
-            return $this->redirectToRoute('add');
-        } else {
-            return $this->render('DimaBatteriesBundle:Batteries:add.html.twig', [
-                'form' => $form->createView(),
-                'error' => 'Error'
-            ]);
         }
+
+        return $this->render('DimaBatteriesBundle:Batteries:add.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

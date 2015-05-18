@@ -17,9 +17,7 @@ class BatteryType extends AbstractType
         $builder
             ->add('type')
             ->add('owner')
-            ->add('count')
-            ->add('save', 'submit');
-        ;
+            ->add('count', 'number', array('mapped' => false));
     }
     
     /**
