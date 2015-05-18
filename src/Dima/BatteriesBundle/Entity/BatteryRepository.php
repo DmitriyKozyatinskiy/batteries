@@ -12,11 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class BatteryRepository extends EntityRepository
 {
-    public function findAllGroupedByType()
+    public function countAllGroupedByType()
     {
         return $qb = $this->createQueryBuilder('b')
             ->select('b.type, count(b.id) AS num')
             ->groupBy('b.type')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function deleteAll()
+    {
+        return $qb = $this->createQueryBuilder('b')
+            ->delete()
             ->getQuery()
             ->getResult();
     }

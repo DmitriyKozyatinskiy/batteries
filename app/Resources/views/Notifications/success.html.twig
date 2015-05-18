@@ -1,0 +1,9 @@
+{% set messages = app.session.flashbag.get('success') %}
+
+{% if messages is defined and messages %}
+    <div class="alert alert-success text-center">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}

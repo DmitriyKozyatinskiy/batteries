@@ -6,6 +6,12 @@
     </header>
 
     <main class="container">
-        {% block content %}{% endblock %}
+        <div class="row">
+            <div class="col-xs-offset-4 col-xs-4">
+                {% include '::Notifications/notifications.html.twig' %}
+
+                {% block content %}{% endblock %}
+            </div>
+        </div>
     </main>
 {% endblock %}

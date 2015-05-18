@@ -3,7 +3,6 @@
 {% block title %}Add Batteries{% endblock %}
 
 {% block content %}
-    {{ error is defined ? error : '' }}
 
     {{ form_start(form) }}
 
@@ -11,7 +10,9 @@
     {{ form_row(form.count) }}
     {{ form_row(form.owner) }}
 
-    <input type="submit" value="Save">
+    {% include 'Form/submit.html.twig' with {'text': 'Save'} %}
 
     {{ form_end(form) }}
+
+    <a href="{{ path('show') }}">Show all</a>
 {% endblock %}

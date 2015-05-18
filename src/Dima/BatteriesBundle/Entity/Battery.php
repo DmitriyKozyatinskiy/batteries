@@ -22,7 +22,7 @@ class Battery
     /**
      * @var string
      */
-    private $owner;
+    private $owner = 'Anonymous';
 
 
     /**

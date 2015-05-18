@@ -15,4 +15,5 @@ Dima\BatteriesBundle\Entity\Battery:
         owner:
             type: string
             length: 255
+            nullable: true
     lifecycleCallbacks: {  }

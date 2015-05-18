@@ -1,0 +1,6 @@
+DimaBatteriesBundle\Entity\Battery:
+    properties:
+        type:
+            - NotBlank: ~
+        owner:
+            - NotBlank: ~

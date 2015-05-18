@@ -15,7 +15,7 @@ class BatteriesController extends Controller
 
         $batteries = $em
             ->getRepository('DimaBatteriesBundle:Battery')
-            ->findAllGroupedByType();
+            ->countAllGroupedByType();
 
         return $this->render('DimaBatteriesBundle:Batteries:show.html.twig', [
             'batteries' => $batteries
@@ -29,6 +29,7 @@ class BatteriesController extends Controller
 
         if ($form->isValid()) {
             $count = $form['count']->getData();
+            $owner = $form['owner']->getData();
             $data = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
@@ -38,10 +39,29 @@ class BatteriesController extends Controller
                 $em->flush();
                 $em->clear();
             }
+
+            $this->addFlash(
+                'success', ($owner ? $owner : 'Anonymous') . ', you have successfully added ' . $count . ' batteries!'
+            );
         }
 
         return $this->render('DimaBatteriesBundle:Batteries:add.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    public function resetAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->getRepository('DimaBatteriesBundle:Battery')->deleteAll();
+
+        $em->flush();
+
+        $this->addFlash(
+            'notify', 'You have successfully reset all data.'
+        );
+
+        return $this->redirectToRoute('show');
     }
 }

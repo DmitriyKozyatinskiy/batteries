@@ -4,30 +4,31 @@
 
 {% block content %}
     {% if not batteries|length %}
-        <div>No data found</div>
-    {% else %}
-        <div class="row">
-            <div class="col-xs-offset-4 col-xs-4">
-                <table class="table">
-                    <caption class="text-center">
-                        Click <a href="{{ path('add') }}">here</a> to add new batteries to the box
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th class="text-right">Count</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for battery in batteries %}
-                        <tr>
-                            <td>{{ battery.type }}</td>
-                            <td class="text-right">{{ battery.num }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <div class="alert alert-info text-center">
+            <p>No data found</p>
+            <p>Click <a href="{{ path('add') }}">here</a> to add new batteries to the box</p>
         </div>
+    {% else %}
+        <table class="table">
+            <caption class="text-center">
+                Click <a href="{{ path('add') }}">here</a> to add new batteries to the box
+            </caption>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th class="text-right">Count</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for battery in batteries %}
+                <tr>
+                    <td>{{ battery.type }}</td>
+                    <td class="text-right">{{ battery.num }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('reset') }}">Reset all data</a>
     {% endif %}
 {% endblock %}
